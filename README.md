@@ -1,6 +1,11 @@
-Dev notes
+# Dev notes
 
-sec1
+## how to run
+
+npm install
+npm run dev
+
+## sec1
 setup attribute: write more concise script tags.
 
 v-on:click
