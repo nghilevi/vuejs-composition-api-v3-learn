@@ -31,10 +31,18 @@
         })
     })
 
+    // postsStore.foo = 'bar' // can be mutate directly, some ppl may have NO problem with it
+
 </script>
 
 <template>
+    <!-- 
+    custom reactive store
     {{ postsStore.getState().foo }} <br/>
+    <button @click="postsStore.updateFoo('bar')">Update</button>
+    -->
+
+    pinia store: {{ postsStore.foo }}
     <button @click="postsStore.updateFoo('bar')">Update</button>
     <nav class="is-primary panel">
         selectedPeriod: {{ selectedPeriod }}

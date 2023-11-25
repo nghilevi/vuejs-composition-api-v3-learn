@@ -1,3 +1,4 @@
+/*
 import { reactive, readonly } from "vue"
 
 interface PostsState {
@@ -31,11 +32,28 @@ const store = new PostsStore()
 // store.updateFoo('bar')
 
 // inject/provide -> a more idiomatic way
-/* 
-. a very common convention to access your composable
 
-. a composable: a way to have stateful reusable logic, and that's exactly what we're doing here
-*/
+// . a very common convention to access your composable
+// . a composable: a way to have stateful reusable logic, and that's exactly what we're doing here
+
 export function usePosts(){ // to be reusable throughout our application
     return store
 }
+*/
+
+import { defineStore } from "pinia"
+
+interface PostsState {
+    foo: string
+}
+
+export const usePosts =defineStore("posts", {
+    state: (): PostsState => ({
+        foo: "foo"
+    }),
+    actions: {
+        updateFoo(foo: string){
+            this.foo = foo // same as this.$state.foo
+        }
+    }
+})
