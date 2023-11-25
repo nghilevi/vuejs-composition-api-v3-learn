@@ -25,3 +25,8 @@ computed
 . e.g selectedPeriod
 
 For ts improvement, search for "TS improvment"
+
+## sec2
+. ref (number, string)
+. computed
+. reactive: like ref, but for complex obj e.g map/set

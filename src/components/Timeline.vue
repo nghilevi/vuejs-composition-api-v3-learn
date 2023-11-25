@@ -2,7 +2,10 @@
     import { computed, ref } from 'vue';
     import { TimelinePost, thisMonth, thisWeek, today } from '../posts';
     import TimelineItem from './TimelineItem.vue';
+    import { usePosts } from '../stores/posts';
 
+    const postsStore = usePosts()
+    
     const periods = ["Today", "This week", "This month"] as const
     // w/o as const, periods is gonna be dynamic
     type Period = typeof periods[number]
@@ -11,7 +14,8 @@
         selectedPeriod.value = period;
     }
 
-    const posts = computed<TimelinePost[]>(() => { // TS improvment
+    // TS improvment
+    const posts = computed<TimelinePost[]>(() => {
         return [today, thisWeek, thisMonth]
         .map(p => { // TODO should use reduce insted 2 loops
             return {...p, created: new Date(p.created)}
@@ -30,6 +34,8 @@
 </script>
 
 <template>
+    {{ postsStore.getState().foo }} <br/>
+    <button @click="postsStore.updateFoo('bar')">Update</button>
     <nav class="is-primary panel">
         selectedPeriod: {{ selectedPeriod }}
         <span class="panel-tabs">
