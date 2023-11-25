@@ -16,8 +16,12 @@
 
     // TS improvment
     const posts = computed<TimelinePost[]>(() => {
-        return [today, thisWeek, thisMonth]
-        .map(p => { // TODO should use reduce insted 2 loops
+        return postsStore.ids
+        .map(id => { // TODO should use reduce insted 2 loops
+            const p = postsStore.all.get(id)
+            if(!p){
+                throw Error(`Post with id of ${id} was expected but not found`)
+            }
             return {...p, created: new Date(p.created)}
         })
         .filter(p => {

@@ -42,14 +42,26 @@ export function usePosts(){ // to be reusable throughout our application
 */
 
 import { defineStore } from "pinia"
+import { Post, thisMonth, thisWeek, today } from "../posts"
 
+/*
+all = { 1 => { title, created }} // map
+    Record<string, Post>
+access: all["1"]
+*/
 interface PostsState {
-    foo: string
+    ids: string[],
+    all: Map<string, Post>
 }
 
-export const usePosts =defineStore("posts", {
+export const usePosts = defineStore("posts", {
     state: (): PostsState => ({
-        foo: "foo"
+        ids: [today.id, thisWeek.id, thisMonth.id],
+        all: new Map([
+            [today.id, today],
+            [thisWeek.id, thisWeek],
+            [thisMonth.id, thisMonth]
+        ])
     }),
     actions: {
         updateFoo(foo: string){
