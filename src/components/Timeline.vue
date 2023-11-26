@@ -4,7 +4,7 @@
     import { periods } from '../constants';
 
     const postsStore = usePosts()
-    postsStore.fetchPosts()
+    await postsStore.fetchPosts() // indicate to vue that we're going to be using suspense.
 </script>
 
 <template>

@@ -5,7 +5,7 @@
 npm install
 npm run dev
 
-## sec1
+## sec1: composition api
 setup attribute: write more concise script tags.
 
 v-on:click
@@ -13,6 +13,7 @@ v-on:click
 . if not passing param, then evt object will be passed by default
 
 
+### ref (number, string)
 let selectedPeriod = ref('Today') 
 selectedPeriod becomes reactive ref (no longer string primitiv)
 
@@ -26,12 +27,12 @@ computed
 
 For ts improvement, search for "TS improvment"
 
-## sec2
-. ref (number, string)
-. computed
-. reactive: like ref, but for complex obj e.g map/set
+## sec2: reactive store
 
-pinia
+### reactive
+. like ref, but for complex obj e.g map/set
+
+### pinia
 . very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
 
 node server
@@ -51,3 +52,9 @@ npx ts-node src/server/index.ts
 
 troubleshooting
 . Unknown file extension ".ts": https://stackoverflow.com/a/62099904/2515839
+
+### Suspense
+. powerful since didn't have to write conditionals / flags
+
+## sec3: router
+
