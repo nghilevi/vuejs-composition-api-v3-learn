@@ -30,3 +30,6 @@ For ts improvement, search for "TS improvment"
 . ref (number, string)
 . computed
 . reactive: like ref, but for complex obj e.g map/set
+
+pinia
+. very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.

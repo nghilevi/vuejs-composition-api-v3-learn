@@ -57,7 +57,6 @@ interface PostsState {
 }
 
 // very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
-
 export const usePosts = defineStore("posts", {
     state: (): PostsState => ({ // reactive
         ids: [today.id, thisWeek.id, thisMonth.id],
