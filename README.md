@@ -33,3 +33,21 @@ For ts improvement, search for "TS improvment"
 
 pinia
 . very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
+
+node server
+npm install express@4.17 @types/express@4.17 cors@2.8 @types/cors@2.8 ts-node@10 --dev
+
+. install ts-node -> able to use ts in node env
+. need to configure a bit for ts-node
+<- basically if we're executing code on the server, we need to use something called common JS instead of ES modules.
+"ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "esModuleInterop": true // https://stackoverflow.com/a/63745904/2515839
+    }
+  }
+
+npx ts-node src/server/index.ts
+
+troubleshooting
+. Unknown file extension ".ts": https://stackoverflow.com/a/62099904/2515839
