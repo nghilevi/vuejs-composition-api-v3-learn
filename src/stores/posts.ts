@@ -42,7 +42,8 @@ export function usePosts(){ // to be reusable throughout our application
 */
 
 import { defineStore } from "pinia"
-import { Post, thisMonth, thisWeek, today } from "../posts"
+import { Post, TimelinePost, thisMonth, thisWeek, today } from "../posts"
+import { Period } from "../constants"
 
 /*
 all = { 1 => { title, created }} // map
@@ -51,21 +52,46 @@ access: all["1"]
 */
 interface PostsState {
     ids: string[],
-    all: Map<string, Post>
+    all: Map<string, Post>,
+    selectedPeriod: Period
 }
 
+// very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
+
 export const usePosts = defineStore("posts", {
-    state: (): PostsState => ({
+    state: (): PostsState => ({ // reactive
         ids: [today.id, thisWeek.id, thisMonth.id],
         all: new Map([
             [today.id, today],
             [thisWeek.id, thisWeek],
             [thisMonth.id, thisMonth]
-        ])
+        ]),
+        selectedPeriod: 'Today'
     }),
-    actions: {
-        updateFoo(foo: string){
-            this.foo = foo // same as this.$state.foo
+    actions: { // just methods
+        setSelectedPeriod(period: Period){
+            this.selectedPeriod = period
         }
+    },
+    getters:{ //wrapped in a computed property
+        filteredPosts: (state): TimelinePost[] => {
+            return state.ids
+            .map(id => { // TODO should use reduce insted 2 loops
+                const p = state.all.get(id)
+                if(!p){
+                    throw Error(`Post with id of ${id} was expected but not found`)
+                }
+                return {...p, created: new Date(p.created)}
+            })
+            .filter(p => {
+                if(state.selectedPeriod === 'Today'){
+                    return p.title === 'Today'
+                }
+
+                if(state.selectedPeriod === 'This week'){
+                    return p.title === 'Today' || p.title === 'this week'
+                }
+            })
+            }
     }
 })

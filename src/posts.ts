@@ -7,7 +7,7 @@ export interface Post {
 }
 
 export interface TimelinePost extends Omit<Post, 'created'> { // TS improvment
-    created: DateTime
+    created: DateTime | any
 }
 
 export const today: Post = {
