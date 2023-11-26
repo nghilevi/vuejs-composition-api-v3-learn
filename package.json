@@ -16,7 +16,8 @@
     "luxon": "^2.3.1",
     "pinia": "^2.1.7",
     "ts-node": "^10.9.1",
-    "vue": "^3.3.8"
+    "vue": "^3.3.8",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@types/luxon": "^3.3.5",
