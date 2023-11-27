@@ -63,6 +63,14 @@ troubleshooting
 
 . <div contenteditable> = textarea with a bit more power and control
 
+. html rendering
+{{ html }} assign as htmlText
+<div v-html='html' /> but lost 2 way binding -> use reactive api (watch, watchEffect)
+
+from <h2 id="title">Title</h2> to Title
+
+. watch, watchEffect
+
 
 
 ## lifecycle hooks
@@ -79,3 +87,6 @@ onMounted(() => {
 })
 
 <div contenteditable ref="contentEditable">some note</div>
+
+## code organization
+imports -> props -> variables -> lifecycle hooks -> functions

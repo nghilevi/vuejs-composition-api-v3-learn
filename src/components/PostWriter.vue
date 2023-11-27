@@ -2,6 +2,7 @@
 // imports
 import { onMounted, ref } from 'vue'
 import { TimelinePost } from '../posts'
+import { marked } from 'marked'
 
 // props
 const props = defineProps<{ post: TimelinePost }>()
@@ -10,6 +11,11 @@ const props = defineProps<{ post: TimelinePost }>()
 const title = ref(props.post.title)
 const content = ref(props.post.markdown)
 const contentEditable = ref<HTMLDivElement>()
+const html = ref('')
+
+marked.parse(content.value, (err, parseResult) => {
+    html.value = parseResult
+})
 
 // lifecycle hooks
 onMounted(() => {
@@ -45,7 +51,7 @@ function handleInput(){
             <div contenteditable ref="contentEditable" @input="handleInput"/>
         </div>
         <div class="column">
-            {{ content }}
+            <div v-html="html" />
         </div>
     </div>
 </template>
