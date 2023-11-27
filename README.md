@@ -30,16 +30,16 @@ For ts improvement, search for "TS improvment"
 ## sec2: reactive store
 
 ### reactive
-. like ref, but for complex obj e.g map/set
+like ref, but for complex obj e.g map/set
 
 ### pinia
-. very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
+very thin abstraction on top of the composition API just to make it a little bit easier to reason and manage your application.
 
-node server
+### node server
 npm install express@4.17 @types/express@4.17 cors@2.8 @types/cors@2.8 ts-node@10 --dev
 
-. install ts-node -> able to use ts in node env
-. need to configure a bit for ts-node
+install ts-node -> able to use ts in node env
+need to configure a bit for ts-node
 <- basically if we're executing code on the server, we need to use something called common JS instead of ES modules.
 "ts-node": {
     "compilerOptions": {
@@ -54,23 +54,23 @@ troubleshooting
 . Unknown file extension ".ts": https://stackoverflow.com/a/62099904/2515839
 
 ### Suspense
-. powerful since didn't have to write conditionals / flags
+powerful since didn't have to write conditionals / flags
 
 ## sec3: router
-. a href: do a full page refresh
-. RouterLink: do a FE only refresh and dynamically update everything without actually refreshing the page
-. DOM access wf template refs / automatically associate ref with DOM node / access DOM content with ref
+a href: do a full page refresh
+RouterLink: do a FE only refresh and dynamically update everything without actually refreshing the page
+DOM access wf template refs / automatically associate ref with DOM node / access DOM content with ref
 
-. <div contenteditable> = textarea with a bit more power and control
+<div contenteditable> = textarea with a bit more power and control
 
-. html rendering
+html rendering
 {{ html }} assign as htmlText
 <div v-html='html' /> but lost 2 way binding -> use reactive api (watch, watchEffect)
 
 from <h2 id="title">Title</h2> to Title
 
-. watch, watchEffect
-
+watch vs watchEffect
+https://dev.to/krivanek06/vuejs-watcheffect-vs-watch-1323
 
 
 ## lifecycle hooks
