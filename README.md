@@ -57,4 +57,6 @@ troubleshooting
 . powerful since didn't have to write conditionals / flags
 
 ## sec3: router
+. a href: do a full page refresh
+. RouterLink: do a FE only refresh and dynamically update everything without actually refreshing the page
 
