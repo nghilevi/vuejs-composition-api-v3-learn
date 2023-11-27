@@ -1,15 +1,31 @@
 <script lang="ts" setup>
+// imports
 import { onMounted, ref } from 'vue'
 import { TimelinePost } from '../posts'
 
+// props
 const props = defineProps<{ post: TimelinePost }>()
 
+// variables
 const title = ref(props.post.title)
+const content = ref(props.post.markdown)
 const contentEditable = ref<HTMLDivElement>()
 
+// lifecycle hooks
 onMounted(() => {
-    console.log('contentEditable: ', contentEditable.value?.innerText)
+    if(!contentEditable.value){
+        throw Error('invalid content')
+    }
+    contentEditable.value.innerText = content.value
 })
+
+// functions
+function handleInput(){
+    if(!contentEditable.value){
+        throw Error('invalid content')
+    }
+    content.value = contentEditable.value?.innerText
+}
 </script>
 
 <template>
@@ -22,8 +38,14 @@ onMounted(() => {
                 {{ title }}
             </div>
         </div>
-        <div contenteditable ref="contentEditable">
-        some note
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <div contenteditable ref="contentEditable" @input="handleInput"/>
+        </div>
+        <div class="column">
+            {{ content }}
         </div>
     </div>
 </template>
