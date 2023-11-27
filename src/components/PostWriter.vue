@@ -1,10 +1,15 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { TimelinePost } from '../posts'
 
 const props = defineProps<{ post: TimelinePost }>()
 
 const title = ref(props.post.title)
+const contentEditable = ref<HTMLDivElement>()
+
+onMounted(() => {
+    console.log('contentEditable: ', contentEditable.value?.innerText)
+})
 </script>
 
 <template>
@@ -16,6 +21,9 @@ const title = ref(props.post.title)
                 <!-- <input type="text" class="input" :value="title" @input="event => title.value = event.target.value"> -->
                 {{ title }}
             </div>
+        </div>
+        <div contenteditable ref="contentEditable">
+        some note
         </div>
     </div>
 </template>

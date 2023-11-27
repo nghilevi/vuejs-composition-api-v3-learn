@@ -59,4 +59,23 @@ troubleshooting
 ## sec3: router
 . a href: do a full page refresh
 . RouterLink: do a FE only refresh and dynamically update everything without actually refreshing the page
+. DOM access wf template refs / automatically associate ref with DOM node / access DOM content with ref
 
+. <div contenteditable> = textarea with a bit more power and control
+
+
+
+## lifecycle hooks
+
+onMounted: 
+. called once the component is initially mounted
+. all code inside of script is going to be executed once when the component is first created. Creation is different to mounting. when everything has been rendered mounted is going
+to be called.
+. 
+const contentEditable = ref<HTMLDivElement>()
+
+onMounted(() => {
+    console.log('contentEditable: ', contentEditable.value?.innerText)
+})
+
+<div contenteditable ref="contentEditable">some note</div>
