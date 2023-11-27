@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 // imports
-import { onMounted, ref, watch, watchEffect } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { TimelinePost } from '../posts'
 import { marked } from 'marked'
+import highlightjs from 'highlight.js';
 
 // props
 const props = defineProps<{ post: TimelinePost }>()
@@ -32,7 +33,13 @@ watchEffect(() => {
 // watch is only called when variable changes
 // more explicit
 watch(content, (newContent) => {
-    marked.parse(newContent, (_err: any, parseResult: string) => {
+    marked.parse(newContent, {
+        gfm: true, // github flavored markdown
+        breaks: true,
+        highlight: (code) => { // code = the one we'd like to highlight
+            return highlightjs.highlightAuto(code).value // return the correct syntax highlighting
+        }
+    },(_err: any, parseResult: string) => {
         html.value = parseResult
     })
 }, {
