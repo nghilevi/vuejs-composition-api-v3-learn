@@ -42,7 +42,7 @@ export function usePosts(){ // to be reusable throughout our application
 */
 
 import { defineStore } from "pinia"
-import { Post, TimelinePost, thisMonth, thisWeek, today } from "../posts"
+import { Post, TimelinePost } from "../posts"
 import { Period } from "../constants"
 
 /*
@@ -85,6 +85,9 @@ export const usePosts = defineStore("posts", {
             }
             this.ids = ids
             this.all = all
+        },
+        createPost(post: TimelinePost){
+            console.log(post)
         }
     },
     getters:{ //wrapped in a computed property

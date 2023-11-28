@@ -4,6 +4,8 @@ import { onMounted, ref, watch } from 'vue'
 import { TimelinePost } from '../posts'
 import { marked } from 'marked'
 import highlightjs from 'highlight.js';
+import debounce from 'lodash/debounce'
+import { usePosts } from '../stores/posts'
 
 // props
 const props = defineProps<{ post: TimelinePost }>()
@@ -13,7 +15,19 @@ const title = ref(props.post.title)
 const content = ref(props.post.markdown)
 const contentEditable = ref<HTMLDivElement>()
 const html = ref('') // do not considered as reactive changes
+const posts = usePosts() // posts store
 
+function parseHtml(markdown: string){
+    marked.parse(markdown, {
+        gfm: true,
+        breaks: true,
+        highlight: (code) => {
+            return highlightjs.highlightAuto(code).value
+        }
+    },(_err: any, parseResult: string) => {
+        html.value = parseResult
+    })
+}
 /*
 // only executed once
 marked.parse(content.value, (err, parseResult) => {
@@ -32,17 +46,7 @@ watchEffect(() => {
 
 // watch is only called when variable changes
 // more explicit
-watch(content, (newContent) => {
-    marked.parse(newContent, {
-        gfm: true, // github flavored markdown
-        breaks: true,
-        highlight: (code) => { // code = the one we'd like to highlight
-            return highlightjs.highlightAuto(code).value // return the correct syntax highlighting
-        }
-    },(_err: any, parseResult: string) => {
-        html.value = parseResult
-    })
-}, {
+watch(content, debounce(parseHtml, 500), {
     /*
     . called the very first time the comp is created
     . called every time content changes
@@ -65,6 +69,14 @@ function handleInput(){
     }
     content.value = contentEditable.value?.innerText
 }
+
+function handleClick(){
+    const newPost: TimelinePost = {
+        ...props.post, title: title.value, markdown: content.value, html: html.value
+    }
+    posts.createPost(newPost)
+}
+
 </script>
 
 <template>
@@ -83,6 +95,14 @@ function handleInput(){
         </div>
         <div class="column">
             <div v-html="html" />
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <button class="button is-primary is-pulled-right" @click="handleClick()">
+                Save Post
+            </button>
         </div>
     </div>
 </template>
