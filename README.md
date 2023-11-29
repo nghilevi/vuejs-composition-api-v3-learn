@@ -90,3 +90,10 @@ onMounted(() => {
 
 ## code organization
 imports -> props -> variables -> lifecycle hooks -> functions
+
+## sec4
+(vue) composable 
+. a function that leverages Vue composition API to encapsulate and reuse stateful logic.
+. the convention is to start with the word use.
+. decoupled reactivity system: able to use Vue's reactivity APIs outside the context of a view component -> easy programmatic way to control our modal
+-> easier than with options api
