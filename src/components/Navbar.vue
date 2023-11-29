@@ -8,4 +8,8 @@
             </div>
         </div>
     </div>
+
+    <Teleport to="#modal"><!-- rmb # -->
+        content to be rendered
+    </Teleport>
 </template>    
